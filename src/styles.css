@@ -25,11 +25,12 @@ html {
 }
 
 .Search {
+  width: 70%;
   display: flex;
 }
 
 .Search_input {
-  width: 230px;
+  width: 90%;
   padding: 0.5rem;
 }
 
@@ -47,4 +48,25 @@ html {
 
 .button {
   border: none;
+}
+
+.Pagination__arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.Footer {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  background-color: var(--brand);
+}
+
+.Footer__text {
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.link {
+  color: #4183c4;
 }
