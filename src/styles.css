@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+:root {
+  --brand: #3551d5;
+}
+
+.Header {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  background-color: var(--brand);
+}
+
+.Title {
+  display: none;
+}
+
+.Search {
+  display: flex;
+}
+
+.Search_input {
+  width: 230px;
+  padding: 0.5rem;
+}
+
+.Category__button {
+  display: none;
+}
+
+.Menu__button {
+  height: 3rem;
+}
+
+.Menu__button img {
+  height: inherit;
+}
+
+.button {
+  border: none;
+}
