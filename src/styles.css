@@ -81,8 +81,17 @@ Body {
   transition: all 200ms linear;
 }
 
+.Category_list h1 {
+  margin: 1rem 0.5rem;
+}
+
 .active {
   right: 0px;
+}
+
+.hover:hover {
+  color: #3a2a2a;
+  cursor: pointer;
 }
 
 /* Main Styles */
@@ -187,6 +196,14 @@ Body {
 
 .text_center {
   text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .lds-ring {

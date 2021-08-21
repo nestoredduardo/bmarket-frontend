@@ -11,6 +11,11 @@ const categoryBtn = document.getElementById('Category_button');
 
 const searchInput = document.getElementById('buscar_input');
 
+let arrowLeftNode = document.querySelectorAll('#arrow-left');
+arrowLeftNode = [...arrowLeftNode];
+let arrowRightNode = document.querySelectorAll('#arrow-right');
+arrowRightNode = [...arrowRightNode];
+
 let data = {};
 
 const getProducts = async (page = 1, category = 1) => {
@@ -35,6 +40,7 @@ const getProducts = async (page = 1, category = 1) => {
   } else {
     const productList = data.body.data;
     const npages = data.body.meta.npages;
+    const page = data.body.meta.page;
 
     let allItems = [];
     productList.forEach((item) => {
@@ -66,7 +72,7 @@ const getProducts = async (page = 1, category = 1) => {
 
     productsNode.append(...allItems);
 
-    createPagination(npages, category);
+    createPagination(npages, category, page);
   }
 
   loading.classList.remove('display');
@@ -74,7 +80,7 @@ const getProducts = async (page = 1, category = 1) => {
   console.log(data);
 };
 
-const createPagination = (npages, category) => {
+const createPagination = (npages, category, npage) => {
   paginationNode.forEach((item) => {
     item.innerHTML = '';
     let allPages = [];
@@ -82,6 +88,9 @@ const createPagination = (npages, category) => {
       const page = document.createElement('span');
       const number = i + 1;
       page.textContent = number;
+      if (number === npage) {
+        page.classList.add('bold');
+      }
       page.addEventListener('click', () => {
         getProducts(number, category);
       });
@@ -91,6 +100,26 @@ const createPagination = (npages, category) => {
 
     item.append(...allPages);
   });
+
+  if (parseInt(npage) - 1 > 0) {
+    console.log('Allow left');
+    arrowLeftNode.forEach((item) => {
+      item.addEventListener('click', () => {
+        getProducts(npage - 1, category);
+      });
+      item.classList.add('pointer');
+    });
+  }
+
+  if (parseInt(npage) + 1 <= npages) {
+    console.log('Allow right');
+    arrowRightNode.forEach((item) => {
+      item.addEventListener('click', () => {
+        getProducts(npage + 1, category);
+      });
+      item.classList.add('pointer');
+    });
+  }
 };
 
 const getCategories = async () => {
@@ -100,12 +129,11 @@ const getCategories = async () => {
   data = await response.json();
   const { categories } = data.body;
 
-  console.log(data);
-
   let allCategories = [];
   categories.forEach((item) => {
     const name = document.createElement('h1');
-    name.textContent = item.name;
+    name.textContent = item.name.toUpperCase();
+    name.classList.add('hover');
     name.addEventListener('click', () => {
       getProducts(1, item.id);
     });
@@ -131,7 +159,7 @@ getCategories();
 //Eventos de categoría
 categoryBtn.addEventListener('mouseover', () => {
   categoriesNode.classList.add('display');
-  categoryBtn.removeEventListener('mouseleave');
+  categoryBtn.removeEventListener('mouseleave', () => {});
 });
 
 categoriesNode.addEventListener('mouseover', () => {
@@ -145,6 +173,7 @@ categoriesNode.addEventListener('mouseleave', () => {
   });
 });
 
+//Search event
 searchInput.addEventListener('input', async (e) => {
   const valor = e.target.value;
 
@@ -153,7 +182,7 @@ searchInput.addEventListener('input', async (e) => {
   const response = await fetch(
     `https://aqueous-wildwood-80798.herokuapp.com/search?input=${valor}`
   );
-  const data = response.json();
+  const data = await response.json();
 
   console.log(data);
 
