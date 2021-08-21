@@ -15,16 +15,16 @@
       <input class="Search_input" type="text" id="buscar_input" name="buscar" placeholder="Busca productos, categorías y más...">
       <button class="Search__button button"><img src="./src/assets/icons-search.png" alt="Search"></button>
     </form>
-    <button class="Category__button button">Categorías <img src="./src/assets/icon-arrow-down.png" alt=""></button>
-    <button class="Menu__button button"><img src="./src/assets/icon-menu.png" alt=""></button>
+    <button class="Category__button button" id="Category_button">Categorías <img src="./src/assets/icon-arrow-down.png" alt="Mostrar categorías" height="15" width="15"></button>
+    <button class="Menu__button button" id="Menu__button"><img src="./src/assets/icon-menu.png" alt="Mostrar categorías"></button>
   </header>
   <aside class="Category_list" id="Category_list">
-    <ul>
-    </ul>
+    <img id="Close_category" class="Close_category button" src="./src/assets/icon-cerrar.png" alt="Cerrar" height="30" width="30">
   </aside>
   <main class="Main">
     <section class="Pagination">
       <img class="Pagination__arrow" src="./src/assets/icon-left-arrow.png" alt="Flecha Izquierda">
+      <div id="Pagination_number"></div>
       <img class="Pagination__arrow" src="./src/assets/icon-right-arrow.png" alt="Flecha derecha">
     </section>
     <section class="List" id="List">
@@ -37,6 +37,7 @@
     </section>
     <section class="Pagination">
       <img class="Pagination__arrow" src="./src/assets/icon-left-arrow.png" alt="Flecha Izquierda">
+      <div id="Pagination_number"></div>
       <img class="Pagination__arrow" src="./src/assets/icon-right-arrow.png" alt="Flecha derecha">
     </section>
   </main>
