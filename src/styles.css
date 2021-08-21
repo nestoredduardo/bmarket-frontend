@@ -38,11 +38,16 @@ Body {
 .Search {
   width: 70%;
   display: flex;
+  align-items: center;
+  background-color: white;
 }
 
-.Search_input {
-  width: 90%;
+.Search__input {
+  width: 100%;
   padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 .Category__button {
@@ -234,6 +239,10 @@ Body {
     display: inline-flex;
     margin: 0 1rem;
     color: white;
+  }
+
+  .Search__input {
+    padding: 1rem 0.5rem;
   }
 
   .Category__button {

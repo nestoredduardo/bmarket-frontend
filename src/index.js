@@ -3,12 +3,13 @@ const loading = document.getElementById('Loading');
 
 let paginationNode = document.querySelectorAll('#Pagination_number');
 paginationNode = [...paginationNode];
-
 const categoriesNode = document.getElementById('Category_list');
 
 const menuBtn = document.getElementById('Menu__button');
 const cerrarBtn = document.getElementById('Close_category');
 const categoryBtn = document.getElementById('Category_button');
+
+const searchInput = document.getElementById('buscar_input');
 
 let data = {};
 
@@ -115,6 +116,7 @@ const getCategories = async () => {
   categoriesNode.append(...allCategories);
 };
 
+//Menú lateral
 menuBtn.addEventListener('click', () => {
   categoriesNode.classList.add('active');
 });
@@ -126,6 +128,7 @@ cerrarBtn.addEventListener('click', () => {
 getProducts();
 getCategories();
 
+//Eventos de categoría
 categoryBtn.addEventListener('mouseover', () => {
   categoriesNode.classList.add('display');
   categoryBtn.removeEventListener('mouseleave');
@@ -140,4 +143,53 @@ categoriesNode.addEventListener('mouseleave', () => {
   categoryBtn.addEventListener('mouseleave', () => {
     categoriesNode.classList.remove('display');
   });
+});
+
+searchInput.addEventListener('input', async (e) => {
+  const valor = e.target.value;
+
+  productsNode.innerHTML = '';
+
+  const response = await fetch(
+    `https://aqueous-wildwood-80798.herokuapp.com/search?input=${valor}`
+  );
+  const data = response.json();
+
+  console.log(data);
+
+  const productList = data.body.products;
+
+  let allItems = [];
+  productList.forEach((item) => {
+    let image;
+    if (item.url_image) {
+      image = document.createElement('img');
+      image.classList.add('Product__img');
+      image.src = item.url_image;
+    } else {
+      image = document.createElement('h1');
+      image.textContent = 'Imagen no disponible';
+      image.classList.add('Error_message');
+    }
+
+    const title = document.createElement('h2');
+    title.classList.add('Product__title');
+    title.textContent = item.name;
+
+    const price = document.createElement('div');
+    price.classList.add('Product__price');
+    price.textContent = item.price;
+
+    const container = document.createElement('div');
+    container.classList.add('Product');
+    container.append(image, title, price);
+
+    allItems.push(container);
+  });
+
+  productsNode.append(...allItems);
+
+  if (!valor) {
+    getProducts();
+  }
 });
