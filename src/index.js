@@ -115,7 +115,7 @@ const createPagination = (npages, category, npage) => {
     console.log('Allow right');
     arrowRightNode.forEach((item) => {
       item.addEventListener('click', () => {
-        getProducts(npage + 1, category);
+        getProducts(parseInt(npage) + 1, category);
       });
       item.classList.add('pointer');
     });
