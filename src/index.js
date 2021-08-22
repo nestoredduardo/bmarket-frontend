@@ -22,7 +22,7 @@ const getProducts = async (page = 1, category = 1) => {
   loading.classList.add('display');
   productsNode.innerHTML = '';
 
-  const url = `https://aqueous-wildwood-80798.herokuapp.com/products?page=${page}&category=${category}`;
+  const url = `https://bmarket-api.herokuapp.com/products?page=${page}&category=${category}`;
 
   const response = await fetch(url);
   data = await response.json();
@@ -124,7 +124,7 @@ const createPagination = (npages, category, npage) => {
 
 const getCategories = async () => {
   const response = await fetch(
-    `https://aqueous-wildwood-80798.herokuapp.com/categories`
+    `https://bmarket-api.herokuapp.com/categories`
   );
   data = await response.json();
   const { categories } = data.body;
@@ -180,7 +180,7 @@ searchInput.addEventListener('input', async (e) => {
   productsNode.innerHTML = '';
 
   const response = await fetch(
-    `https://aqueous-wildwood-80798.herokuapp.com/search?input=${valor}`
+    `https://bmarket-api.herokuapp.com/search?input=${valor}`
   );
   const data = await response.json();
 
