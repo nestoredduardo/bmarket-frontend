@@ -88,7 +88,7 @@ const createPagination = (npages, category, npage) => {
       const page = document.createElement('span');
       const number = i + 1;
       page.textContent = number;
-      if (number === npage) {
+      if (number == npage) {
         page.classList.add('bold');
       }
       page.addEventListener('click', () => {
